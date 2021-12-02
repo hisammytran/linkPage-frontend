@@ -12,7 +12,32 @@ import Typography from '@mui/material/Typography';
 
 // import IconButton from '@mui/material/IconButton';
 // import MenuIcon from '@mui/icons-material/Menu';
+const style = {
+    fontSize: 14,
+    position: 'absolute',
+    padding: 1,
+    margin: 1,
+    width: 400,
+    maxWidth:"75%",
+    bgcolor: 'background.paper',
+    border: '2px solid #000',
+    boxShadow: 24,
+    p: 4,
+  };
 
+function Links(props){
+
+    return(
+        <div>
+            <Box sx={style}>
+                
+                <Button variant="outlined" component={Link} href={props.URL}>{props.name}</Button>
+            </Box>
+        </div>
+    )
+}
+
+//home page will show your saved links
 function Home() {
 
     return (
@@ -29,7 +54,7 @@ function Home() {
 
                 </Toolbar>
             </AppBar>
-            <div className="App-header">
+            <div className="App-heade">
                 <form>
                     <label>
                         URL:
@@ -41,6 +66,7 @@ function Home() {
                     </label>
                     <input type="submit" value="Submit" />
                 </form>
+                <Links URL="https://www.yahoo.com" name="yahoo">hi</Links>
             </div>
         </Box>
 
