@@ -1,10 +1,14 @@
+// Filename: src/Home/index.js
+// Author: Sammy Tran
+// Description: Page that allows you to add/delete/update links on your page
+
 import '../App.css';
 import Button from '@mui/material/Button';
 import Link from '@mui/material/Link'
 
 // import { TextField } from '@mui/material';
 // import Stack from '@mui/material/Stack';
-// import React, { useState } from 'react';
+import React, { useState } from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -25,7 +29,8 @@ const style = {
     p: 4,
   };
 
-function Links(props){
+//   Component that will house the links
+function LinkButton(props){
 
     return(
         <div>
@@ -36,10 +41,22 @@ function Links(props){
         </div>
     )
 }
+//helper function for submission
+
 
 //home page will show your saved links
 function Home() {
+    const [url,setURL] = useState("");
+    const [linkName,setName]=useState("");
 
+    const handleSubmit=()=>{
+        const formDetails={
+            'URL': url,
+            'Name': linkName
+        }
+        console.log(formDetails);
+       
+    }
     return (
 
         <Box sx={{ flexGrow: 1 }}>
@@ -55,18 +72,20 @@ function Home() {
                 </Toolbar>
             </AppBar>
             <div className="App-heade">
-                <form>
+                {/* <form> */}
                     <label>
                         URL:
-                        <input type="url" name="url" />
+                        <input type="url" name="url" onChange={e=>setURL(e.target.value)}/>
                     </label>
                     <label>
                         Link Name:
-                        <input type="text" name="name"/>
+                        <input type="text" name="name" onChange={e=>setName(e.target.value)}/>
                     </label>
-                    <input type="submit" value="Submit" />
-                </form>
-                <Links URL="https://www.yahoo.com" name="yahoo">hi</Links>
+                    <button onClick={handleSubmit} value="Submit" />
+                {/* </form> */}
+
+                {/* make api call to retrieve links and map them to a link button */}
+                <LinkButton URL="https://www.yahoo.com" name="yahoo">hi</LinkButton>
             </div>
         </Box>
 
