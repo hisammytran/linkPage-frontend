@@ -13,7 +13,7 @@ const style = {
   left: '50%',
   transform: 'translate(-50%, -50%)',
   width: 400,
-  maxWidth:"75%",
+  maxWidth: "75%",
   bgcolor: 'background.paper',
   border: '2px solid #000',
   boxShadow: 24,
@@ -35,30 +35,52 @@ function Register() {
   //Form Data collection/validation and Ajax Call
   const submitValues = () => {
     const formDetails = {
-      'Username': username,
-      'Password': password,
-      'Confirm': confirm,
+      "username": username,
+      "password": password,
     }
     setSubmit(true)
     console.log(formDetails);
+    let valid = true
+    let httpcode = 404
     // make ajax request here
     if (username === "") {
       setUErr(true)
+      valid = false
     }
     else { setUErr(false) }
     if (password === "") {
       setPErr(true)
+      valid = false
     }
     else { setPErr(false) }
     if (confirm !== password) {
       setCErr(true)
+      valid = false
     }
     else {
       if (confirm === "") {
         setCErr(true)
+        valid = false
       }
       else { setCErr(false) }
     }
+
+    if (valid == true) {
+      fetch('http://127.0.0.1:5000/api/users', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          // 'Authorization': 'Basic ' + Buffer.from(data).toString('base64'),
+        },
+        body: JSON.stringify(formDetails)
+      }).then(response => response.json()).then(json => console.log(json))
+      
+      .catch(err => { console.log(err) })
+    
+    
+    }
+
   }
 
   // Get Errors

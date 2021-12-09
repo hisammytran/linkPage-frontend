@@ -38,14 +38,17 @@ function Login() {
       'username': username,
       'password': password
     }
-    fetch('http://127.0.0.1:5000/api/users/', {
-      method: 'POST',
+    let data = (username+':'+password)
+    // let buff = new Buffer(data)
+    fetch('http://127.0.0.1:5000/api/resource/', {
+      method: 'GET',
       headers: {
-        'Accept': 'text/html',
-        'Content-Type': 'text/html',
+        'Accept': 'text/plain',
+        'Content-Type': 'text/plain',
+        'Authorization': 'Basic '+ Buffer.from(data).toString('base64'),
       },
-      body: JSON.stringify(formDetails)
-    }).then(response => response.json()).then(json => console.log(json));
+      // body: JSON.stringify(formDetails)
+    }).then(response => response.json()).then(json => console.log(json)).catch(err=>{console.log(err)})
     // console.log(formDetails);
     // make ajax request here
     // console.log(username==="")
