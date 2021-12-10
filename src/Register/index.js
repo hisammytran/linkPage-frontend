@@ -26,6 +26,7 @@ function Register() {
   const [password, setPass] = useState("");
   const [confirm, setConfirm] = useState("");
   const [submit, setSubmit] = useState(false);
+  const [loggedIn, setLogin] = useState(0);
 
   //error states
   const [cErr, setCErr] = useState(false);
@@ -41,7 +42,7 @@ function Register() {
     setSubmit(true)
     console.log(formDetails);
     let valid = true
-    let httpcode = 404
+    
     // make ajax request here
     if (username === "") {
       setUErr(true)
@@ -74,15 +75,20 @@ function Register() {
           // 'Authorization': 'Basic ' + Buffer.from(data).toString('base64'),
         },
         body: JSON.stringify(formDetails)
-      }).then(response => response.json()).then(json => console.log(json))
-      
-      .catch(err => { console.log(err) })
-    
-    
+      }).then(response => {
+
+        response.json()
+        setLogin(response.status)
+      }).then(json => console.log(json)).catch(err => { console.log(err) })
+
+
     }
 
   }
-
+  //Get HTTP response
+  const getResponse = () =>{
+    return loggedIn
+  }
   // Get Errors
   const getUErr = () => {
     return userErr
@@ -101,8 +107,10 @@ function Register() {
       return cErr
     }
   }
+ 
+  let error = loggedIn == 400
 
-  if (userErr === false && passErr === false && submit === true) {
+  if (userErr === false && passErr === false && submit === true && loggedIn == 201) {
     return <Redirect to='/home' />
   }
   else {
@@ -116,7 +124,8 @@ function Register() {
             <h1 style={{ color: 'black' }}>Register</h1>
             <Stack spacing={4}>
               <TextField
-                error={getErr('u')}
+                error={getErr('u')|| (error)}
+                helperText={error? "Username taken or not valid":"Please enter valid username"}
                 onChange={e => setUser(e.target.value)}
                 required
                 id="outlined-username-input"

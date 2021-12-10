@@ -40,7 +40,7 @@ function Login() {
     }
     let data = (username+':'+password)
     // let buff = new Buffer(data)
-    fetch('http://127.0.0.1:5000/api/resource/', {
+    fetch('http://127.0.0.1:5000/api/token', {
       method: 'GET',
       headers: {
         'Accept': 'text/plain',
@@ -48,6 +48,7 @@ function Login() {
         'Authorization': 'Basic '+ Buffer.from(data).toString('base64'),
       },
       // body: JSON.stringify(formDetails)
+      // need to store returned jwt in http only cookie
     }).then(response => response.json()).then(json => console.log(json)).catch(err=>{console.log(err)})
     // console.log(formDetails);
     // make ajax request here
