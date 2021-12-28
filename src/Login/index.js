@@ -26,7 +26,7 @@ function Login() {
   const [username, setUser] = useState("");
   const [password, setPass] = useState("");
   const [submit, setSubmit] = useState(false);
-
+  const [loggedIn,setLogin] = useState(0);
   const [userErr, setUErr] = useState(false);
   const [passErr, setPErr] = useState(false);
 
@@ -49,7 +49,10 @@ function Login() {
       },
       // body: JSON.stringify(formDetails)
       // need to store returned jwt in http only cookie
-    }).then(response => response.json()).then(json => console.log(json)).catch(err=>{console.log(err)})
+    }).then(response => {
+      response.json()
+      setLogin(response.status)
+    }).then(json =>console.log(json)).catch(err=>{console.log(err)})
     // console.log(formDetails);
     // make ajax request here
     // console.log(username==="")
@@ -89,7 +92,7 @@ function Login() {
     }
   }
 
-  if (userErr === false && passErr === false && submit === true) {
+  if (userErr === false && passErr === false && submit === true && loggedIn===200) {
     return <Redirect to='/home' />
   }
   else {

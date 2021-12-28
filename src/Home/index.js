@@ -18,12 +18,14 @@ import Typography from '@mui/material/Typography';
 // import MenuIcon from '@mui/icons-material/Menu';
 const style = {
     fontSize: 14,
-    position: 'absolute',
+    display: 'flex',
+    justifyContent:'center',
+    alignItems:'center',
     padding: 1,
     margin: 1,
     width: 400,
     maxWidth:"75%",
-    bgcolor: 'background.paper',
+    bgcolor: 'black',
     border: '2px solid #000',
     boxShadow: 24,
     p: 4,
@@ -35,8 +37,10 @@ function LinkButton(props){
     return(
         <div>
             <Box sx={style}>
-                
+                <Box sx={{textAlign:'center'}}>
+                <h1>Your Links</h1>
                 <Button variant="outlined" component={Link} href={props.URL}>{props.name}</Button>
+                </Box>
             </Box>
         </div>
     )
@@ -71,7 +75,7 @@ function Home() {
 
                 </Toolbar>
             </AppBar>
-            <div className="App-heade">
+            <div className="App-header">
                 {/* <form> */}
                     <label>
                         URL:
@@ -81,7 +85,7 @@ function Home() {
                         Link Name:
                         <input type="text" name="name" onChange={e=>setName(e.target.value)}/>
                     </label>
-                    <button onClick={handleSubmit} value="Submit" />
+                    <Button onClick={handleSubmit} variant='outlined' value="Submit" >Submit</Button>
                 {/* </form> */}
 
                 {/* make api call to retrieve links and map them to a link button */}

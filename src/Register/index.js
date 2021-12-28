@@ -66,7 +66,7 @@ function Register() {
       else { setCErr(false) }
     }
 
-    if (valid == true) {
+    if (valid === true) {
       fetch('http://127.0.0.1:5000/api/users', {
         method: 'POST',
         headers: {
@@ -108,9 +108,9 @@ function Register() {
     }
   }
  
-  let error = loggedIn == 400
+  let error = loggedIn === 400
 
-  if (userErr === false && passErr === false && submit === true && loggedIn == 201) {
+  if (userErr === false && passErr === false && submit === true && loggedIn === 201) {
     return <Redirect to='/home' />
   }
   else {
