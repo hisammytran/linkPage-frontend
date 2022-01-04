@@ -107,7 +107,7 @@ function Login() {
             <h1 style={{ color: 'black' }}>Sign in</h1>
             <Stack spacing={4}>
               <TextField
-                error={getErr('u')}
+                error={getErr('u')&&loggedIn!=200}
                 onChange={e => setUser(e.target.value)}
                 required
                 id="outlined-username-input"
@@ -115,7 +115,7 @@ function Login() {
                 type="text"
               />
               <TextField
-                error={getErr('p')}
+                error={getErr('p')&&loggedIn!=200}
                 onChange={e => setPass(e.target.value)}
                 required
                 id="outlined-password-input"

@@ -19,27 +19,29 @@ import Typography from '@mui/material/Typography';
 const style = {
     fontSize: 14,
     display: 'flex',
-    justifyContent:'center',
-    alignItems:'center',
+    justifyContent: 'center',
+    flexDirection: 'column',
+    alignItems: 'center',
     padding: 1,
     margin: 1,
     width: 400,
-    maxWidth:"75%",
+    maxWidth: "75%",
     bgcolor: 'black',
     border: '2px solid #000',
     boxShadow: 24,
     p: 4,
-  };
+    gap: 1,
+};
 
 //   Component that will house the links
-function LinkButton(props){
+function LinkButton(props) {
 
-    return(
+    return (
         <div>
-            <Box sx={style}>
-                <Box sx={{textAlign:'center'}}>
-                <h1>Your Links</h1>
-                <Button variant="outlined" component={Link} href={props.URL}>{props.name}</Button>
+            <Box>
+                <Box sx={{ textAlign: 'center' }}>
+                    <h1>Your Links</h1>
+                    <Button variant="outlined" component={Link} href={props.URL}>{props.name}</Button>
                 </Box>
             </Box>
         </div>
@@ -50,21 +52,23 @@ function LinkButton(props){
 
 //home page will show your saved links
 function Home() {
-    const [url,setURL] = useState("");
-    const [linkName,setName]=useState("");
+    const [url, setURL] = useState("");
+    const [linkName, setName] = useState("");
 
-    const handleSubmit=()=>{
-        const formDetails={
+    const handleSubmit = () => {
+        const formDetails = {
             'URL': url,
             'Name': linkName
         }
         console.log(formDetails);
-       
+
     }
     return (
 
         <Box sx={{ flexGrow: 1 }}>
-            <AppBar position="static">
+           
+
+            {/* <AppBar position="static">
                 <Toolbar>
 
                     <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
@@ -74,23 +78,30 @@ function Home() {
                     <Button variant="outlined" style={{ color: 'white' }} component={Link} href="/">Logout</Button>
 
                 </Toolbar>
-            </AppBar>
+            </AppBar> */}
             <div className="App-header">
                 {/* <form> */}
+                
+                <LinkButton URL="https://www.yahoo.com" name="yahoo">hi</LinkButton>
+                <Box sx={style}>
+                    <h2>Add Links</h2>
+                    URL:
                     <label>
-                        URL:
-                        <input type="url" name="url" onChange={e=>setURL(e.target.value)}/>
+
+                        <input type="url" name="url" onChange={e => setURL(e.target.value)} />
                     </label>
+                    Link Name:
                     <label>
-                        Link Name:
-                        <input type="text" name="name" onChange={e=>setName(e.target.value)}/>
+
+                        <input type="text" name="name" onChange={e => setName(e.target.value)} />
                     </label>
                     <Button onClick={handleSubmit} variant='outlined' value="Submit" >Submit</Button>
-                {/* </form> */}
-
+                    {/* </form> */}
+                </Box>
                 {/* make api call to retrieve links and map them to a link button */}
-                <LinkButton URL="https://www.yahoo.com" name="yahoo">hi</LinkButton>
+            
             </div>
+            <Button variant="outlined"  component={Link} href="/">Logout</Button>
         </Box>
 
     )
